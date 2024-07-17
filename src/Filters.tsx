@@ -12,9 +12,10 @@ interface FiltersProps {
   setSelectedTheater: React.Dispatch<React.SetStateAction<string>>;
   setSelectedOperatingRoom: React.Dispatch<React.SetStateAction<string>>;
   setSelectedSpecialty: React.Dispatch<React.SetStateAction<string>>;
-  setSelectedDoctor: React.Dispatch<React.SetStateAction<string>>; // Add this line
+  setSelectedDoctor: React.Dispatch<React.SetStateAction<string>>;
   handleSearchChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleSpecialtyChange: (event: React.ChangeEvent<HTMLSelectElement>) => void; // Add this line
+  handleSpecialtyChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  handleDoctorSelect: (doctor: string) => void; // Add this line
   doctorSearchResults: string[];
   clearFilters: () => void;
 }
@@ -22,7 +23,7 @@ interface FiltersProps {
 const Filters: React.FC<FiltersProps> = ({
   selectedHospital, selectedTheater, selectedOperatingRoom, selectedSpecialty, selectedDoctor,
   setSelectedHospital, setSelectedTheater, setSelectedOperatingRoom, setSelectedSpecialty,
-  setSelectedDoctor, handleSearchChange, handleSpecialtyChange, // Add this line
+  setSelectedDoctor, handleSearchChange, handleSpecialtyChange, handleDoctorSelect, // Add this line
   doctorSearchResults, clearFilters
 }) => (
   <div className="filters">
@@ -74,7 +75,7 @@ const Filters: React.FC<FiltersProps> = ({
       {doctorSearchResults.length > 0 && (
         <ul className="doctor-search-results">
           {doctorSearchResults.map((doctor: string, index: number) => (
-            <li key={index} onClick={() => setSelectedDoctor(doctor)}>
+            <li key={index} onClick={() => handleDoctorSelect(doctor)}>
               {doctor}
             </li>
           ))}

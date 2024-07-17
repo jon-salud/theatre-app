@@ -39,7 +39,7 @@ select, input {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  align-self: center;
+  align-self: flex-end;
 }
 
 .clear-button:hover {

@@ -73,6 +73,11 @@ const App: React.FC = () => {
     setSelectedOperatingRoom(''); // Clear operating room
   };
 
+  const handleDoctorSelect = (doctor: string) => {
+    setSelectedDoctor(doctor);
+    setDoctorSearchResults([]); // Clear search results to hide dropdown
+  };
+
   const filteredAssignments = useMemo(() => {
     return filterData(selectedDoctor, selectedSpecialty);
   }, [filterData, selectedDoctor, selectedSpecialty]);
@@ -92,7 +97,8 @@ const App: React.FC = () => {
         setSelectedSpecialty={setSelectedSpecialty}
         setSelectedDoctor={setSelectedDoctor}
         handleSearchChange={handleSearchChange}
-        handleSpecialtyChange={handleSpecialtyChange} // Add this line
+        handleSpecialtyChange={handleSpecialtyChange}
+        handleDoctorSelect={handleDoctorSelect} // Pass this handler
         doctorSearchResults={doctorSearchResults}
         clearFilters={clearFilters}
       />
