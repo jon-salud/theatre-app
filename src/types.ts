@@ -1,9 +1,9 @@
 export interface HospitalData {
-    [hospital: string]: TheaterData;
+    [hospital: string]: TheatreData;
   }
   
-  export interface TheaterData {
-    [theater: string]: OperatingRoomData;
+  export interface TheatreData {
+    [theatre: string]: OperatingRoomData;
   }
   
   export interface OperatingRoomData {
@@ -16,7 +16,7 @@ export interface HospitalData {
   
   export interface Assignment {
     hospital: string;
-    theater: string;
+    theatre: string;
     operatingRoom: string;
     specialty: string;
     doctors: string[];

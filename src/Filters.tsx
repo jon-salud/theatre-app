@@ -4,12 +4,12 @@ import { hospitalData } from './data'; // Ensure to import hospitalData
 // Define the types for the props
 interface FiltersProps {
   selectedHospital: string;
-  selectedTheater: string;
+  selectedTheatre: string;
   selectedOperatingRoom: string;
   selectedSpecialty: string;
   selectedDoctor: string;
   setSelectedHospital: React.Dispatch<React.SetStateAction<string>>;
-  setSelectedTheater: React.Dispatch<React.SetStateAction<string>>;
+  setselectedTheatre: React.Dispatch<React.SetStateAction<string>>;
   setSelectedOperatingRoom: React.Dispatch<React.SetStateAction<string>>;
   setSelectedSpecialty: React.Dispatch<React.SetStateAction<string>>;
   setSelectedDoctor: React.Dispatch<React.SetStateAction<string>>;
@@ -21,8 +21,8 @@ interface FiltersProps {
 }
 
 const Filters: React.FC<FiltersProps> = ({
-  selectedHospital, selectedTheater, selectedOperatingRoom, selectedSpecialty, selectedDoctor,
-  setSelectedHospital, setSelectedTheater, setSelectedOperatingRoom, setSelectedSpecialty,
+  selectedHospital, selectedTheatre, selectedOperatingRoom, selectedSpecialty, selectedDoctor,
+  setSelectedHospital, setselectedTheatre, setSelectedOperatingRoom, setSelectedSpecialty,
   setSelectedDoctor, handleSearchChange, handleSpecialtyChange, handleDoctorSelect,
   doctorSearchResults, clearFilters
 }) => {
@@ -61,6 +61,20 @@ const Filters: React.FC<FiltersProps> = ({
     }
   }, [focusedIndex]);
 
+  // Get sorted list of specialties
+  const sortedSpecialties = Array.from(new Set(
+    Object.keys(hospitalData).flatMap(hospital => 
+      Object.keys(hospitalData[hospital]).flatMap(theatre => 
+        Object.keys(hospitalData[hospital][theatre]).flatMap(operatingRoom => 
+          Object.keys(hospitalData[hospital][theatre][operatingRoom])
+        )
+      )
+    )
+  )).sort();
+
+  // Get sorted list of doctors based on the search query
+  const sortedDoctorSearchResults = doctorSearchResults.slice().sort();
+
   return (
     <div className="filters">
       <div className="filter-item">
@@ -73,19 +87,19 @@ const Filters: React.FC<FiltersProps> = ({
         </select>
       </div>
       <div className="filter-item">
-        <label htmlFor="theater-select">Theater: </label>
-        <select id="theater-select" onChange={(e) => setSelectedTheater(e.target.value)} value={selectedTheater} disabled={!selectedHospital && !selectedDoctor && !selectedSpecialty}>
+        <label htmlFor="theatre-select">Theatre: </label>
+        <select id="theatre-select" onChange={(e) => setselectedTheatre(e.target.value)} value={selectedTheatre} disabled={!selectedHospital && !selectedDoctor && !selectedSpecialty}>
           <option value="">All</option>
-          {selectedHospital && Object.keys(hospitalData[selectedHospital]).map(theater => (
-            <option key={theater} value={theater}>{theater}</option>
+          {selectedHospital && Object.keys(hospitalData[selectedHospital]).map(theatre => (
+            <option key={theatre} value={theatre}>{theatre}</option>
           ))}
         </select>
       </div>
       <div className="filter-item">
         <label htmlFor="operating-room-select">Operating Room: </label>
-        <select id="operating-room-select" onChange={(e) => setSelectedOperatingRoom(e.target.value)} value={selectedOperatingRoom} disabled={!selectedTheater && !selectedDoctor && !selectedSpecialty}>
+        <select id="operating-room-select" onChange={(e) => setSelectedOperatingRoom(e.target.value)} value={selectedOperatingRoom} disabled={!selectedTheatre && !selectedDoctor && !selectedSpecialty}>
           <option value="">All</option>
-          {selectedTheater && Object.keys(hospitalData[selectedHospital][selectedTheater]).map(room => (
+          {selectedTheatre && Object.keys(hospitalData[selectedHospital][selectedTheatre]).map(room => (
             <option key={room} value={room}>{room}</option>
           ))}
         </select>
@@ -94,13 +108,7 @@ const Filters: React.FC<FiltersProps> = ({
         <label htmlFor="specialty-select">Specialty: </label>
         <select id="specialty-select" onChange={handleSpecialtyChange} value={selectedSpecialty}>
           <option value="">All</option>
-          {Object.keys(hospitalData).flatMap(hospital => 
-            Object.keys(hospitalData[hospital]).flatMap(theater => 
-              Object.keys(hospitalData[hospital][theater]).flatMap(operatingRoom => 
-                Object.keys(hospitalData[hospital][theater][operatingRoom])
-              )
-            )
-          ).filter((value, index, self) => self.indexOf(value) === index).map(specialty => (
+          {sortedSpecialties.map(specialty => (
             <option key={specialty} value={specialty}>{specialty}</option>
           ))}
         </select>
@@ -114,9 +122,9 @@ const Filters: React.FC<FiltersProps> = ({
           onChange={handleSearchChange}
           onKeyDown={handleKeyDown}
         />
-        {doctorSearchResults.length > 0 && (
+        {sortedDoctorSearchResults.length > 0 && (
           <ul className="doctor-search-results">
-            {doctorSearchResults.map((doctor: string, index: number) => (
+            {sortedDoctorSearchResults.map((doctor: string, index: number) => (
               <li
                 key={index}
                 className={focusedIndex === index ? 'focused' : ''}

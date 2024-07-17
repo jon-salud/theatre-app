@@ -90,7 +90,6 @@ select, input {
   background-color: #857f7f;
 }
 
-
 .doctor-search-results {
   max-height: 150px; /* Adjust as needed */
   overflow-y: auto;
