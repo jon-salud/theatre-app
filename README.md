@@ -1,46 +1,164 @@
-# Getting Started with Create React App
+# Hospital Assignments Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
+The Hospital Assignments Application is a web-based application designed to allow users to view and filter assignments of doctors to operating rooms across various hospitals. Users can filter assignments based on hospital, theatre, operating room, specialty, and doctor.
 
-## Available Scripts
+## Functional Requirements
 
-In the project directory, you can run:
+### User Interface
 
-### `npm start`
+#### Filters Component
+- **Hospital Filter**: Dropdown to select a hospital. When a hospital is selected, the theatre and operating room filters should update accordingly.
+- **Theatre Filter**: Dropdown to select a theatre within the selected hospital. This should be disabled if no hospital is selected.
+- **Operating Room Filter**: Dropdown to select an operating room within the selected theatre. This should be disabled if no theatre is selected.
+- **Specialty Filter**: Dropdown to select a specialty. This should be available regardless of other filters.
+- **Doctor Search**: Text input to search for doctors by name. This should filter the dropdown results dynamically as the user types.
+- **Clear Filters Button**: Button to clear all filters and reset the application to its default state.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+#### Assignments Table
+- **Columns**:
+  - Hospital
+  - Theatre
+  - Operating Room
+  - Specialty
+  - Doctors
+- **Rows**: Display assignments filtered based on the selected criteria.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Data Handling
+- **Data Source**: The application should fetch data from a predefined data source (hospitalData).
+- **Sorting**:
+  - Specialties and doctors should be displayed in alphabetical order in their respective dropdowns.
 
-### `npm test`
+### Interactions
+- **Filter Selection**:
+  - Changing the hospital filter should reset the theatre and operating room filters.
+  - Changing the specialty filter should reset the hospital, theatre, and operating room filters.
+  - Typing in the doctor search should dynamically filter the doctor results and highlight the matching entries.
+  - Selecting a doctor from the dropdown using the arrow keys and pressing Enter or Tab should populate the doctor search input and filter the results accordingly.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Accessibility
+- **Keyboard Navigation**:
+  - Users should be able to navigate through the doctor search results using the arrow keys.
+  - Pressing Enter or Tab should select the focused doctor and update the filters.
 
-### `npm run build`
+## Non-Functional Requirements
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Performance
+- The application should load and respond to user interactions within 2 seconds.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Scalability
+- The application should be able to handle up to 1,000 hospitals, 10,000 theatres, and 100,000 doctors without performance degradation.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Usability
+- The application should be intuitive and easy to use for both technical and non-technical users.
+- The UI should be responsive and function well on various devices (desktops, tablets, mobile phones).
 
-### `npm run eject`
+### Maintainability
+- The codebase should be organised and modular to facilitate easy maintenance and future enhancements.
+- The project should follow best practices for React development and TypeScript usage.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## Technical Requirements
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Development Environment
+- **Language**: TypeScript
+- **Framework**: React
+- **State Management**: React Hooks
+- **Styling**: CSS
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Project Structure
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```perl
+my-app/
+├── public/
+│ ├── index.html
+│ └── ...
+├── src/
+│ ├── assets/ # Static assets (images, fonts, etc.)
+│ ├── components/ # Reusable components
+│ │ ├── Filters.tsx
+│ │ └── ...
+│ ├── hooks/ # Custom hooks
+│ ├── pages/ # Page components
+│ │ ├── HomePage.tsx
+│ │ └── ...
+│ ├── services/ # API calls and external services
+│ │ └── api.ts
+│ ├── styles/ # CSS and styled-components
+│ │ └── App.css
+│ ├── tests/ # Test files
+│ │ ├── mocks/ # Mock data
+│ │ │ └── data.ts
+│ │ └── tests/ # Test cases
+│ │ └── Filters.test.tsx
+│ ├── utils/ # Utility functions
+│ ├── App.tsx
+│ ├── index.tsx
+│ └── ...
+├── .github/
+│ └── workflows/ # GitHub Actions workflows
+│ └── ci.yml
+├── .babelrc # Babel configuration
+├── jest.config.js # Jest configuration
+├── tsconfig.json # TypeScript configuration
+├── package.json
+└── ...
+```
 
-## Learn More
+### Testing
+- **Testing Framework**: Jest with React Testing Library
+- **Coverage**: 80% test coverage for all components and functions
+- **Continuous Integration**: GitHub Actions configured to run tests on each check-in
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Dependencies
+- **React**: A JavaScript library for building user interfaces
+- **TypeScript**: A typed superset of JavaScript
+- **Jest**: A delightful JavaScript Testing Framework
+- **React Testing Library**: A lightweight solution for testing React components
+- **Babel**: A JavaScript compiler
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Configuration Files
+- `babel.config.js`: Babel configuration
+- `jest.config.js`: Jest configuration
+- `tsconfig.json`: TypeScript configuration
+- `.github/workflows/ci.yml`: GitHub Actions CI configuration
+
+## Installation and Setup
+
+### Prerequisites
+- Node.js (version 14 or later)
+- npm (version 6 or later) or yarn
+
+### Steps
+
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/your-repo/hospital-assignments-app.git
+    cd hospital-assignments-app
+    ```
+
+2. **Install dependencies**:
+    ```bash
+    npm install
+    # or
+    yarn install
+    ```
+
+3. **Start the development server**:
+    ```bash
+    npm start
+    # or
+    yarn start
+    ```
+
+4. **Run tests**:
+    ```bash
+    npm test
+    # or
+    yarn test
+    ```
+
+## Future Enhancements
+- **User Authentication**: Implement user login and authentication.
+- **Data Persistence**: Integrate with a backend API to fetch and persist data.
+- **Advanced Filtering**: Add more advanced filtering options (e.g., by date, time).
+- **Notifications**: Implement notifications for new assignments or updates.
