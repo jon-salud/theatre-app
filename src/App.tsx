@@ -6,7 +6,7 @@ import Filters from './Filters';
 
 const App: React.FC = () => {
   const [selectedHospital, setSelectedHospital] = useState<string>('');
-  const [selectedTheater, setSelectedTheater] = useState<string>('');
+  const [selectedTheatre, setSelectedTheatre] = useState<string>('');
   const [selectedOperatingRoom, setSelectedOperatingRoom] = useState<string>('');
   const [selectedSpecialty, setSelectedSpecialty] = useState<string>('');
   const [selectedDoctor, setSelectedDoctor] = useState<string>('');
@@ -15,15 +15,15 @@ const App: React.FC = () => {
   // Memoize the filterData function with useCallback to prevent unnecessary re-creations
   const filterData = useCallback((doctor: string, specialty: string) => {
     const result: Assignment[] = [];
-    Object.entries(hospitalData).forEach(([hospital, theaters]) => {
+    Object.entries(hospitalData).forEach(([hospital, theatres]) => {
       if (!selectedHospital || selectedHospital === hospital) {
-        Object.entries(theaters).forEach(([theater, operatingRooms]) => {
-          if (!selectedTheater || selectedTheater === theater) {
+        Object.entries(theatres).forEach(([theatre, operatingRooms]) => {
+          if (!selectedTheatre || selectedTheatre === theatre) {
             Object.entries(operatingRooms).forEach(([operatingRoom, specialties]) => {
               if (!selectedOperatingRoom || selectedOperatingRoom === operatingRoom) {
                 Object.entries(specialties).forEach(([spec, doctors]) => {
                   if ((!specialty || spec === specialty) && (!doctor || doctors.includes(doctor))) {
-                    result.push({ hospital, theater, operatingRoom, specialty: spec, doctors });
+                    result.push({ hospital, theatre, operatingRoom, specialty: spec, doctors });
                   }
                 });
               }
@@ -33,11 +33,11 @@ const App: React.FC = () => {
       }
     });
     return result;
-  }, [selectedHospital, selectedTheater, selectedOperatingRoom]);
+  }, [selectedHospital, selectedTheatre, selectedOperatingRoom]);
 
   const clearFilters = () => {
     setSelectedHospital('');
-    setSelectedTheater('');
+    setSelectedTheatre('');
     setSelectedOperatingRoom('');
     setSelectedSpecialty('');
     setSelectedDoctor('');
@@ -48,7 +48,7 @@ const App: React.FC = () => {
     const query = event.target.value;
     setSelectedDoctor(query);
     setSelectedHospital(''); // Clear hospital
-    setSelectedTheater(''); // Clear theater
+    setSelectedTheatre(''); // Clear theatre
     setSelectedOperatingRoom(''); // Clear operating room
 
     if (query) {
@@ -69,7 +69,7 @@ const App: React.FC = () => {
   const handleSpecialtyChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedSpecialty(event.target.value);
     setSelectedHospital(''); // Clear hospital
-    setSelectedTheater(''); // Clear theater
+    setSelectedTheatre(''); // Clear theatre
     setSelectedOperatingRoom(''); // Clear operating room
   };
 
@@ -87,12 +87,12 @@ const App: React.FC = () => {
       <h1>Hospital Assignments</h1>
       <Filters 
         selectedHospital={selectedHospital}
-        selectedTheater={selectedTheater}
+        selectedTheatre={selectedTheatre}
         selectedOperatingRoom={selectedOperatingRoom}
         selectedSpecialty={selectedSpecialty}
         selectedDoctor={selectedDoctor}
         setSelectedHospital={setSelectedHospital}
-        setSelectedTheater={setSelectedTheater}
+        setselectedTheatre={setSelectedTheatre}
         setSelectedOperatingRoom={setSelectedOperatingRoom}
         setSelectedSpecialty={setSelectedSpecialty}
         setSelectedDoctor={setSelectedDoctor}
@@ -112,7 +112,7 @@ const AssignmentsTable: React.FC<{ assignments: Assignment[] }> = ({ assignments
     <thead>
       <tr>
         <th>Hospital</th>
-        <th>Theater</th>
+        <th>Theatre</th>
         <th>Operating Room</th>
         <th>Specialty</th>
         <th>Doctors</th>
@@ -122,7 +122,7 @@ const AssignmentsTable: React.FC<{ assignments: Assignment[] }> = ({ assignments
       {assignments.map((assignment, index) => (
         <tr key={index}>
           <td>{assignment.hospital}</td>
-          <td>{assignment.theater}</td>
+          <td>{assignment.theatre}</td>
           <td>{assignment.operatingRoom}</td>
           <td>{assignment.specialty}</td>
           <td>{assignment.doctors.join(', ')}</td>
