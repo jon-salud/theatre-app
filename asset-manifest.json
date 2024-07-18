@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/theatre-app/static/css/main.25d7b526.css",
+    "main.js": "/theatre-app/static/js/main.eaf12b9e.js",
+    "static/js/488.4e9242f8.chunk.js": "/theatre-app/static/js/488.4e9242f8.chunk.js",
+    "index.html": "/theatre-app/index.html",
+    "main.25d7b526.css.map": "/theatre-app/static/css/main.25d7b526.css.map",
+    "main.eaf12b9e.js.map": "/theatre-app/static/js/main.eaf12b9e.js.map",
+    "488.4e9242f8.chunk.js.map": "/theatre-app/static/js/488.4e9242f8.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.25d7b526.css",
+    "static/js/main.eaf12b9e.js"
+  ]
+}
