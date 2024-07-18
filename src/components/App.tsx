@@ -1,10 +1,12 @@
 import React, { useState, useMemo, useCallback } from 'react';
 import { hospitalData } from './data';
 import { Assignment } from './types';
-import './App.css';
+import '../styles/App.css';
 import Filters from './Filters';
+import AccessPage from './AccessPage';
 
 const App: React.FC = () => {
+  const [accessGranted, setAccessGranted] = useState(false);
   const [selectedHospital, setSelectedHospital] = useState<string>('');
   const [selectedTheatre, setSelectedTheatre] = useState<string>('');
   const [selectedOperatingRoom, setSelectedOperatingRoom] = useState<string>('');
@@ -12,7 +14,6 @@ const App: React.FC = () => {
   const [selectedDoctor, setSelectedDoctor] = useState<string>('');
   const [doctorSearchResults, setDoctorSearchResults] = useState<string[]>([]);
 
-  // Memoize the filterData function with useCallback to prevent unnecessary re-creations
   const filterData = useCallback((doctor: string, specialty: string) => {
     const result: Assignment[] = [];
     Object.entries(hospitalData).forEach(([hospital, theatres]) => {
@@ -82,27 +83,37 @@ const App: React.FC = () => {
     return filterData(selectedDoctor, selectedSpecialty);
   }, [filterData, selectedDoctor, selectedSpecialty]);
 
+  const handleAccessGranted = () => {
+    setAccessGranted(true);
+  };
+
   return (
     <div className="app-container">
-      <h1>Hospital Assignments</h1>
-      <Filters 
-        selectedHospital={selectedHospital}
-        selectedTheatre={selectedTheatre}
-        selectedOperatingRoom={selectedOperatingRoom}
-        selectedSpecialty={selectedSpecialty}
-        selectedDoctor={selectedDoctor}
-        setSelectedHospital={setSelectedHospital}
-        setselectedTheatre={setSelectedTheatre}
-        setSelectedOperatingRoom={setSelectedOperatingRoom}
-        setSelectedSpecialty={setSelectedSpecialty}
-        setSelectedDoctor={setSelectedDoctor}
-        handleSearchChange={handleSearchChange}
-        handleSpecialtyChange={handleSpecialtyChange}
-        handleDoctorSelect={handleDoctorSelect} // Pass this handler
-        doctorSearchResults={doctorSearchResults}
-        clearFilters={clearFilters}
-      />
-      <AssignmentsTable assignments={filteredAssignments} />
+      {accessGranted ? (
+        <>
+          <h1>Theatre Search</h1>
+          <Filters 
+            selectedHospital={selectedHospital}
+            selectedTheatre={selectedTheatre}
+            selectedOperatingRoom={selectedOperatingRoom}
+            selectedSpecialty={selectedSpecialty}
+            selectedDoctor={selectedDoctor}
+            setSelectedHospital={setSelectedHospital}
+            setselectedTheatre={setSelectedTheatre}
+            setSelectedOperatingRoom={setSelectedOperatingRoom}
+            setSelectedSpecialty={setSelectedSpecialty}
+            setSelectedDoctor={setSelectedDoctor}
+            handleSearchChange={handleSearchChange}
+            handleSpecialtyChange={handleSpecialtyChange}
+            handleDoctorSelect={handleDoctorSelect}
+            doctorSearchResults={doctorSearchResults}
+            clearFilters={clearFilters}
+          />
+          <AssignmentsTable assignments={filteredAssignments} />
+        </>
+      ) : (
+        <AccessPage onAccessGranted={handleAccessGranted} />
+      )}
     </div>
   );
 };
