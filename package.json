@@ -1,6 +1,6 @@
 {
   "name": "hospital-theatre-search-app",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "private": true,
   "homepage": "https://jon-salud.github.io/theatre-app",
   "dependencies": {
@@ -23,6 +23,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "version:patch": "npm version patch",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
