@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './AccessPage.css';
+import '../styles/AccessPage.css';
 
 const AccessPage: React.FC<{ onAccessGranted: () => void }> = ({ onAccessGranted }) => {
   const [password, setPassword] = useState('');
@@ -11,7 +11,8 @@ const AccessPage: React.FC<{ onAccessGranted: () => void }> = ({ onAccessGranted
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (password === 'tr4kc4r3') {
+    const accessPassword = process.env.REACT_APP_ACCESS_PASSWORD;
+    if (password === accessPassword) {
       onAccessGranted();
     } else {
       setError('Invalid password. Please try again.');
