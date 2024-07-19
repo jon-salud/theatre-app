@@ -24,6 +24,24 @@ jobs:
       - name: Build the project
         run: npm run build
 
+      - name: Configure Git
+        run: |
+          git config --global user.email "salud.jon@gmail.com"
+          git config --global user.name "Jon Salud"
+
+      - name: Increment version
+        run: |
+          CURRENT_VERSION=$(npm version patch)
+          echo "New version: $CURRENT_VERSION"
+
+      - name: Commit version increment
+        run: |
+          git add package.json
+          git commit -m "chore: bump version to $CURRENT_VERSION"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Deploy to GitHub Pages
         run: npm run deploy
         env:
