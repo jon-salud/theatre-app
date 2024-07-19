@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { hospitalData } from './data'; // Ensure to import hospitalData
+import React from 'react';
+import { hospitalData } from '../data/data';
 
-// Define the types for the props
 interface FiltersProps {
   selectedHospital: string;
   selectedTheatre: string;
@@ -9,7 +8,7 @@ interface FiltersProps {
   selectedSpecialty: string;
   selectedDoctor: string;
   setSelectedHospital: React.Dispatch<React.SetStateAction<string>>;
-  setselectedTheatre: React.Dispatch<React.SetStateAction<string>>;
+  setSelectedTheatre: React.Dispatch<React.SetStateAction<string>>;
   setSelectedOperatingRoom: React.Dispatch<React.SetStateAction<string>>;
   setSelectedSpecialty: React.Dispatch<React.SetStateAction<string>>;
   setSelectedDoctor: React.Dispatch<React.SetStateAction<string>>;
@@ -22,124 +21,68 @@ interface FiltersProps {
 
 const Filters: React.FC<FiltersProps> = ({
   selectedHospital, selectedTheatre, selectedOperatingRoom, selectedSpecialty, selectedDoctor,
-  setSelectedHospital, setselectedTheatre, setSelectedOperatingRoom, setSelectedSpecialty,
+  setSelectedHospital, setSelectedTheatre, setSelectedOperatingRoom, setSelectedSpecialty,
   setSelectedDoctor, handleSearchChange, handleSpecialtyChange, handleDoctorSelect,
   doctorSearchResults, clearFilters
-}) => {
-  const [focusedIndex, setFocusedIndex] = useState<number>(-1);
-  const focusedItemRef = useRef<HTMLLIElement | null>(null);
-
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (doctorSearchResults.length > 0) {
-      if (event.key === 'ArrowDown') {
-        event.preventDefault();
-        setFocusedIndex((prevIndex) => (prevIndex + 1) % doctorSearchResults.length);
-      } else if (event.key === 'ArrowUp') {
-        event.preventDefault();
-        setFocusedIndex((prevIndex) => (prevIndex === 0 ? doctorSearchResults.length - 1 : prevIndex - 1));
-      } else if (event.key === 'Enter' || event.key === 'Tab') {
-        event.preventDefault();
-        if (focusedIndex >= 0) {
-          handleDoctorSelect(doctorSearchResults[focusedIndex]);
-          setFocusedIndex(-1);
-        }
-      }
-    }
-  };
-
-  const handleDoctorClick = (doctor: string) => {
-    handleDoctorSelect(doctor);
-    setFocusedIndex(-1);
-  };
-
-  useEffect(() => {
-    if (focusedItemRef.current) {
-      focusedItemRef.current.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest'
-      });
-    }
-  }, [focusedIndex]);
-
-  // Get sorted list of specialties
-  const sortedSpecialties = Array.from(new Set(
-    Object.keys(hospitalData).flatMap(hospital => 
-      Object.keys(hospitalData[hospital]).flatMap(theatre => 
-        Object.keys(hospitalData[hospital][theatre]).flatMap(operatingRoom => 
-          Object.keys(hospitalData[hospital][theatre][operatingRoom])
-        )
-      )
-    )
-  )).sort();
-
-  // Get sorted list of doctors based on the search query
-  const sortedDoctorSearchResults = doctorSearchResults.slice().sort();
-
-  return (
-    <div className="filters">
-      <div className="filter-item">
-        <label htmlFor="hospital-select">Hospital: </label>
-        <select id="hospital-select" onChange={(e) => setSelectedHospital(e.target.value)} value={selectedHospital}>
-          <option value="">All</option>
-          {Object.keys(hospitalData).map(hospital => (
-            <option key={hospital} value={hospital}>{hospital}</option>
-          ))}
-        </select>
-      </div>
-      <div className="filter-item">
-        <label htmlFor="theatre-select">Theatre: </label>
-        <select id="theatre-select" onChange={(e) => setselectedTheatre(e.target.value)} value={selectedTheatre} disabled={!selectedHospital && !selectedDoctor && !selectedSpecialty}>
-          <option value="">All</option>
-          {selectedHospital && Object.keys(hospitalData[selectedHospital]).map(theatre => (
-            <option key={theatre} value={theatre}>{theatre}</option>
-          ))}
-        </select>
-      </div>
-      <div className="filter-item">
-        <label htmlFor="operating-room-select">Operating Room: </label>
-        <select id="operating-room-select" onChange={(e) => setSelectedOperatingRoom(e.target.value)} value={selectedOperatingRoom} disabled={!selectedTheatre && !selectedDoctor && !selectedSpecialty}>
-          <option value="">All</option>
-          {selectedTheatre && Object.keys(hospitalData[selectedHospital][selectedTheatre]).map(room => (
-            <option key={room} value={room}>{room}</option>
-          ))}
-        </select>
-      </div>
-      <div className="filter-item">
-        <label htmlFor="specialty-select">Specialty: </label>
-        <select id="specialty-select" onChange={handleSpecialtyChange} value={selectedSpecialty}>
-          <option value="">All</option>
-          {sortedSpecialties.map(specialty => (
-            <option key={specialty} value={specialty}>{specialty}</option>
-          ))}
-        </select>
-      </div>
-      <div className="filter-item">
-        <label htmlFor="doctor-input">Doctor: </label>
-        <input
-          id="doctor-input"
-          type="text"
-          value={selectedDoctor}
-          onChange={handleSearchChange}
-          onKeyDown={handleKeyDown}
-        />
-        {sortedDoctorSearchResults.length > 0 && (
-          <ul className="doctor-search-results">
-            {sortedDoctorSearchResults.map((doctor: string, index: number) => (
-              <li
-                key={index}
-                className={focusedIndex === index ? 'focused' : ''}
-                ref={focusedIndex === index ? focusedItemRef : null}
-                onClick={() => handleDoctorClick(doctor)}
-              >
-                {doctor}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-      <button className="clear-button" onClick={clearFilters}>Clear Filters</button>
+}) => (
+  <div className="filters">
+    <div className="filter-item">
+      <label htmlFor="hospital-select">Hospital: </label>
+      <select id="hospital-select" onChange={(e) => setSelectedHospital(e.target.value)} value={selectedHospital}>
+        <option value="">All</option>
+        {Object.keys(hospitalData).map(hospital => (
+          <option key={hospital} value={hospital}>{hospital}</option>
+        ))}
+      </select>
     </div>
-  );
-};
+    <div className="filter-item">
+      <label htmlFor="theatre-select">Theatre: </label>
+      <select id="theatre-select" onChange={(e) => setSelectedTheatre(e.target.value)} value={selectedTheatre} disabled={!selectedHospital && !selectedDoctor && !selectedSpecialty}>
+        <option value="">All</option>
+        {selectedHospital && Object.keys(hospitalData[selectedHospital]).map(theatre => (
+          <option key={theatre} value={theatre}>{theatre}</option>
+        ))}
+      </select>
+    </div>
+    <div className="filter-item">
+      <label htmlFor="operating-room-select">Operating Room: </label>
+      <select id="operating-room-select" onChange={(e) => setSelectedOperatingRoom(e.target.value)} value={selectedOperatingRoom} disabled={!selectedTheatre && !selectedDoctor && !selectedSpecialty}>
+        <option value="">All</option>
+        {selectedTheatre && Object.keys(hospitalData[selectedHospital][selectedTheatre]).map(room => (
+          <option key={room} value={room}>{room}</option>
+        ))}
+      </select>
+    </div>
+    <div className="filter-item">
+      <label htmlFor="specialty-select">Specialty: </label>
+      <select id="specialty-select" onChange={handleSpecialtyChange} value={selectedSpecialty}>
+        <option value="">All</option>
+        {Object.keys(hospitalData).flatMap(hospital =>
+          Object.keys(hospitalData[hospital]).flatMap(theatre =>
+            Object.keys(hospitalData[hospital][theatre]).flatMap(operatingRoom =>
+              Object.keys(hospitalData[hospital][theatre][operatingRoom])
+            )
+          )
+        ).filter((value, index, self) => self.indexOf(value) === index).map(specialty => (
+          <option key={specialty} value={specialty}>{specialty}</option>
+        ))}
+      </select>
+    </div>
+    <div className="filter-item">
+      <label htmlFor="doctor-input">Doctor: </label>
+      <input id="doctor-input" type="text" value={selectedDoctor} onChange={handleSearchChange} />
+      {doctorSearchResults.length > 0 && (
+        <ul className="doctor-search-results">
+          {doctorSearchResults.map((doctor: string, index: number) => (
+            <li key={index} onClick={() => handleDoctorSelect(doctor)}>
+              {doctor}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+    <button className="clear-button" onClick={clearFilters}>Clear Filters</button>
+  </div>
+);
 
 export default Filters;

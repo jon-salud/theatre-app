@@ -1,6 +1,6 @@
 // src/data.ts
 
-import { HospitalData } from './types';
+import { HospitalData } from '../interface/types';
 
 // // Import the JSON data
 // import hospitalDataJson from '../../../TrakCare-Automation/tests/fixtures/testdata/codetables/theatres/HospitalTheatreLocationSurgeonAndSpecialty.json';

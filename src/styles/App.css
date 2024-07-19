@@ -1,5 +1,6 @@
+/* Base styles */
 .app-container {
-  max-width: 800px;
+  max-width: 960px;
   margin: 0 auto;
   padding: 20px;
   font-family: Arial, sans-serif;
@@ -33,13 +34,14 @@ select, input {
 }
 
 .clear-button {
-  padding: 10px 20px;
+  padding: 10px 10px;
   background-color: #007BFF;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  align-self: flex-end;
+  align-self: top;
+  margin-top: auto;
 }
 
 .clear-button:hover {
@@ -59,11 +61,6 @@ select, input {
 
 .assignments-table th {
   background-color: #f4f4f4;
-  cursor: pointer;
-}
-
-.assignments-table th:hover {
-  background-color: #ddd;
 }
 
 .doctor-search-results {
@@ -86,25 +83,38 @@ select, input {
   background: #f4f4f4;
 }
 
-.focused {
-  background-color: #857f7f;
+/* Responsive styles */
+@media (max-width: 768px) {
+  .app-container {
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .filters {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .filter-item {
+    flex: 1 1 100%;
+  }
+
+  .assignments-table th, .assignments-table td {
+    padding: 8px;
+  }
 }
 
-.doctor-search-results {
-  max-height: 150px; /* Adjust as needed */
-  overflow-y: auto;
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  border: 1px solid #ccc;
-}
+@media (max-width: 480px) {
+  .filters {
+    gap: 5px;
+  }
 
-.doctor-search-results li {
-  padding: 8px;
-  cursor: pointer;
-}
+  .filter-item {
+    flex: 1 1 100%;
+  }
 
-.doctor-search-results li.focused {
-  background-color: #007BFF;
-  color: white;
+  .assignments-table th, .assignments-table td {
+    padding: 6px;
+    font-size: 12px;
+  }
 }

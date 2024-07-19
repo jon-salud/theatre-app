@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useCallback } from 'react';
-import { hospitalData } from './data';
-import { Assignment } from './types';
+import { hospitalData } from '../data/data';
+import { Assignment } from '../interface/types';
 import '../styles/App.css';
 import Filters from './Filters';
 import AccessPage from './AccessPage';
@@ -99,7 +99,7 @@ const App: React.FC = () => {
             selectedSpecialty={selectedSpecialty}
             selectedDoctor={selectedDoctor}
             setSelectedHospital={setSelectedHospital}
-            setselectedTheatre={setSelectedTheatre}
+            setSelectedTheatre={setSelectedTheatre}
             setSelectedOperatingRoom={setSelectedOperatingRoom}
             setSelectedSpecialty={setSelectedSpecialty}
             setSelectedDoctor={setSelectedDoctor}
