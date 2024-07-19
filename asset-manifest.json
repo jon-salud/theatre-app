@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/theatre-app/static/css/main.a46a65be.css",
-    "main.js": "/theatre-app/static/js/main.0d8bc15e.js",
-    "static/js/488.4e9242f8.chunk.js": "/theatre-app/static/js/488.4e9242f8.chunk.js",
+    "main.css": "/theatre-app/static/css/main.64be709d.css",
+    "main.js": "/theatre-app/static/js/main.2fc71edc.js",
+    "static/js/453.82eb860d.chunk.js": "/theatre-app/static/js/453.82eb860d.chunk.js",
     "index.html": "/theatre-app/index.html",
-    "main.a46a65be.css.map": "/theatre-app/static/css/main.a46a65be.css.map",
-    "main.0d8bc15e.js.map": "/theatre-app/static/js/main.0d8bc15e.js.map",
-    "488.4e9242f8.chunk.js.map": "/theatre-app/static/js/488.4e9242f8.chunk.js.map"
+    "main.64be709d.css.map": "/theatre-app/static/css/main.64be709d.css.map",
+    "main.2fc71edc.js.map": "/theatre-app/static/js/main.2fc71edc.js.map",
+    "453.82eb860d.chunk.js.map": "/theatre-app/static/js/453.82eb860d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.a46a65be.css",
-    "static/js/main.0d8bc15e.js"
+    "static/css/main.64be709d.css",
+    "static/js/main.2fc71edc.js"
   ]
 }
