@@ -32,14 +32,14 @@ jobs:
           git config --global user.name "Jon Salud"
 
       - name: Increment version
-        run: npm version patch
         id: npm_version
-
-      - name: Commit version increment
         run: |
-          git add package.json
-          git commit -m "chore: bump version to ${{ steps.npm_version.outputs.new_version }}"
-          git push origin main
+          NEW_VERSION=$(npm version patch)
+          echo "New version: $NEW_VERSION"
+          echo "::set-output name=new_version::$NEW_VERSION"
+
+      - name: Push version increment
+        run: git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
