@@ -34,7 +34,7 @@ jobs:
         run: |
           NEW_VERSION=$(npm version patch)
           echo "New version: $NEW_VERSION"
-          echo "::set-output name=new_version::$NEW_VERSION"
+          echo "new_version=$NEW_VERSION" >> $GITHUB_ENV
 
       - name: Push version increment
         run: |
