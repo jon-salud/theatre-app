@@ -29,15 +29,16 @@ jobs:
           git config --global user.email "salud.jon@gmail.com"
           git config --global user.name "Jon Salud"
 
-      - name: Increment version
-        id: npm_version
-        run: |
-          NEW_VERSION=$(npm version patch)
-          echo "New version: $NEW_VERSION"
-          echo "new_version=$NEW_VERSION" >> $GITHUB_ENV
+#      - name: Increment version
+#        id: npm_version
+#        run: |
+#          NEW_VERSION=$(npm version patch)
+#          echo "New version: $NEW_VERSION"
+#          echo "new_version=$NEW_VERSION" >> $GITHUB_ENV
 
       - name: Push version increment
-        run: |
+        run: 
+          echo "did we get the pat?=${{ secrets.PAT }}"
           git remote set-url origin https://jon-salud:${{ secrets.PAT }}@github.com/jon-salud/theatre-app.git
           git push origin main
         env:
