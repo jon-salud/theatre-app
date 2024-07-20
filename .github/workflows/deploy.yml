@@ -36,14 +36,14 @@ jobs:
           echo "New version: $NEW_VERSION"
           echo "new_version=$NEW_VERSION" >> $GITHUB_ENV
 
-      # - name: Push version increment
-      #   run: |
-      #     git remote set-url origin https://jon-salud:${{ secrets.PAT }}@github.com/jon-salud/theatre-app.git
-      #     git push origin main
-      #   env:
-      #     PAT: ${{ secrets.PAT }}
+      - name: Push version increment
+        run: |
+          git remote set-url origin https://jon-salud:${{ secrets.PAT }}@github.com/jon-salud/theatre-app.git
+          git push origin main
+        env:
+          PAT: ${{ secrets.PAT }}
 
-      # - name: Deploy to GitHub Pages
-      #   run: npm run deploy
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Deploy to GitHub Pages
+        run: npm run deploy
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
