@@ -37,14 +37,17 @@ jobs:
           echo "new_version=$NEW_VERSION" >> $GITHUB_ENV
 
       - name: Push version increment
-        run: 
-          echo `did we get the pat? = ${{ secrets.PAT }}`
+        run: |
           git remote set-url origin https://jon-salud:${{ secrets.PAT }}@github.com/jon-salud/theatre-app.git
           git push origin main
         env:
           PAT: ${{ secrets.PAT }}
 
       - name: Deploy to GitHub Pages
-        run: npm run deploy
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          npm install -g gh-pages
+          gh-pages -d build
