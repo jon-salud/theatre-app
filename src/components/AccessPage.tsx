@@ -1,3 +1,5 @@
+// src\components\AccessPage.tsx
+
 import React, { useState } from 'react';
 import '../styles/AccessPage.css';
 
