@@ -1,3 +1,5 @@
+/* src\styles\AccessPage.css */
+
 .access-page {
     display: flex;
     justify-content: center;
@@ -21,7 +23,7 @@
   }
   
   input {
-    padding: 10px;
+    padding: 6px;
     margin-bottom: 100px;
     border: 1px solid #ccc;
     border-radius: 4px;

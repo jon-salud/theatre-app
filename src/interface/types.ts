@@ -1,3 +1,5 @@
+// src\interface\types.ts
+
 export interface HospitalData {
     [hospital: string]: TheatreData;
   }

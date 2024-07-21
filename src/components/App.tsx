@@ -1,3 +1,5 @@
+// src\components\App.tsx
+
 import React, { useState, useMemo, useCallback } from 'react';
 import { hospitalData } from '../data/data';
 import { Assignment } from '../interface/types';
@@ -69,9 +71,6 @@ const App: React.FC = () => {
 
   const handleSpecialtyChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedSpecialty(event.target.value);
-    setSelectedHospital(''); // Clear hospital
-    setSelectedTheatre(''); // Clear theatre
-    setSelectedOperatingRoom(''); // Clear operating room
   };
 
   const handleDoctorSelect = (doctor: string) => {
