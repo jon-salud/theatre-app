@@ -1,3 +1,5 @@
+// src\components\Filters.tsx
+
 import React from 'react';
 import { hospitalData } from '../data/data';
 

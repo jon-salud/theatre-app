@@ -1,3 +1,5 @@
+// src\components\App.tsx
+
 import React, { useState, useMemo, useCallback } from 'react';
 import { hospitalData } from '../data/data';
 import { Assignment } from '../interface/types';
