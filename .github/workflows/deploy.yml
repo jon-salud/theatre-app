@@ -44,10 +44,8 @@ jobs:
       #     PAT: ${{ secrets.PAT }}
 
       - name: Deploy to GitHub Pages
-        env:
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
           GITHUB_TOKEN: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          npm install -g gh-pages
-          gh-pages -d build
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: build # The folder the action should deploy.
