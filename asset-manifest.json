@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/theatre-app/static/css/main.dbc4ee4a.css",
-    "main.js": "/theatre-app/static/js/main.2fc71edc.js",
+    "main.css": "/theatre-app/static/css/main.d9668df6.css",
+    "main.js": "/theatre-app/static/js/main.fc56c78b.js",
     "static/js/453.82eb860d.chunk.js": "/theatre-app/static/js/453.82eb860d.chunk.js",
     "index.html": "/theatre-app/index.html",
-    "main.dbc4ee4a.css.map": "/theatre-app/static/css/main.dbc4ee4a.css.map",
-    "main.2fc71edc.js.map": "/theatre-app/static/js/main.2fc71edc.js.map",
+    "main.d9668df6.css.map": "/theatre-app/static/css/main.d9668df6.css.map",
+    "main.fc56c78b.js.map": "/theatre-app/static/js/main.fc56c78b.js.map",
     "453.82eb860d.chunk.js.map": "/theatre-app/static/js/453.82eb860d.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.dbc4ee4a.css",
-    "static/js/main.2fc71edc.js"
+    "static/css/main.d9668df6.css",
+    "static/js/main.fc56c78b.js"
   ]
 }
